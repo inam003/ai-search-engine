@@ -2,9 +2,7 @@
 
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Loader2, Link as LinkIcon } from "lucide-react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const fetchNewsArticles = async (query) => {
@@ -40,7 +38,6 @@ export default function MainPage() {
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
-  const [focusMode, setFocusMode] = useState(false);
   const [sources, setSources] = useState([]);
 
   const handleSearch = async (e) => {
@@ -187,51 +184,12 @@ export default function MainPage() {
 
         <Card className="bg-[#25262B] border-none shadow-xl rounded-2xl">
           <form onSubmit={handleSearch} className="relative flex items-center">
-            <div className="flex items-center gap-2 absolute left-4">
-              <button
-                type="button"
-                className="flex items-center gap-2 text-[#6B6C70] hover:text-white text-sm font-medium"
-                onClick={() => setFocusMode(!focusMode)}
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M15.65 5.7L10.33 3.3C7.54 2.1 6.14 2.97 6.14 6.05V17.96C6.14 21.04 7.54 21.91 10.33 20.71L15.65 18.31C18.44 17.11 19.83 15.23 19.83 12.01C19.83 8.79 18.44 6.9 15.65 5.7Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                Focus
-              </button>
-            </div>
             <Input
               placeholder="Ask anything..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full bg-transparent border-none text-[17px] py-7 pl-24 pr-36 focus:ring-0 placeholder-[#6B6C70]"
+              className="w-full bg-transparent border-none text-[17px] py-7 px-4 focus:ring-0 placeholder-[#6B6C70]"
             />
-            <div className="absolute right-3 flex items-center gap-2">
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="text-[#6B6C70] hover:text-white hover:bg-[#2C2D32] h-8 w-8"
-              >
-                <LinkIcon className="h-[18px] w-[18px]" />
-              </Button>
-              <div className="w-[1px] h-5 bg-[#404145]" />
-              <div className="flex items-center gap-1.5">
-                <div className="w-4 h-4 rounded-full bg-[#404145]" />
-                <span className="text-[#6B6C70] text-sm font-medium">Pro</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5 text-[#6B6C70] rotate-[270deg]"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z"
-                  />
-                </svg>
-              </div>
-            </div>
           </form>
         </Card>
 
